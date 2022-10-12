@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
   wrapper: {
     maxHeight: "100vh",
     backgroundSize: "cover",
-    backgroundImage: "url(hero-image2.jpg)",
+    backgroundImage: "url(servers.jpg)",
   },
 
   form: {
@@ -82,7 +82,7 @@ export default function AuthenticationImage({ setToken }) {
           mb={50}
         >
           <img
-            src="company_logo.png"
+            src="digital_prudentia.png"
             alt="digital prudentia"
             className={classes.logo}
           />
@@ -90,13 +90,11 @@ export default function AuthenticationImage({ setToken }) {
         </Title>
 
         <TextInput
-          label="Email address"
           placeholder="user@gmail.com"
           size="md"
         />
         <PasswordInput
-          label="Password"
-          placeholder="Your password"
+          placeholder="password"
           mt="md"
           size="md"
         />
