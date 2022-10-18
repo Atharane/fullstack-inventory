@@ -6,7 +6,7 @@ import Footer from "./Footer.tsx";
 
 import { Skeleton, Grid, useMantineTheme } from "@mantine/core";
 
-let props = {
+let stat_props = {
   data: [
     {
       label: "Page views",
@@ -32,11 +32,14 @@ let props = {
   ],
 };
 
-export default function Dashboard() {
-  const child = <Skeleton height={140} radius="md" animate={false} />;
+export default function Dashboard(props) {
+  // const child = <Skeleton height={140} radius="md" animate={false} />;
+  let logout = props.logout;
+  // let username = props.username;
+
   return (
     <>
-      <Navbar />
+      <Navbar logout={logout} />
 
       <Grid>
         <Grid.Col xs={3}>
@@ -45,7 +48,7 @@ export default function Dashboard() {
 
         <Grid.Col xs={9}>
           <Grid.Col xs={8}>
-            <Stats data={props.data} />
+            <Stats data={stat_props.data} />
           </Grid.Col>
           <Grid.Col xs={6}>
             <img
@@ -58,7 +61,7 @@ export default function Dashboard() {
         </Grid.Col>
       </Grid>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

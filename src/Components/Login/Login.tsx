@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Paper,
   createStyles,
@@ -46,30 +45,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-async function loginUser(credentials) {
-  return fetch("http://localhost:8080/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-}
 
-export default function AuthenticationImage({ setToken }) {
+export default function AuthenticationImage(props) {
   const { classes } = useStyles();
-
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = await loginUser({
-      username,
-      password,
-    });
-    setToken(token);
-  };
 
   return (
     <div className={classes.wrapper}>
@@ -86,21 +64,14 @@ export default function AuthenticationImage({ setToken }) {
             alt="digital prudentia"
             className={classes.logo}
           />
-          Welcome back to Digital Prudentia!
+          Welcome back!
         </Title>
 
-        <TextInput
-          placeholder="user@gmail.com"
-          size="md"
-        />
-        <PasswordInput
-          placeholder="password"
-          mt="md"
-          size="md"
-        />
+        <TextInput placeholder="user@gmail.com" size="md" />
+        <PasswordInput placeholder="password" mt="md" size="md" />
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
 
-        <Button fullWidth mt="xl" size="md" onClick={handleSubmit}>
+        <Button fullWidth mt="xl" size="md" onClick={props.login}>
           Login
         </Button>
 

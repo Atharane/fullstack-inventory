@@ -9,8 +9,7 @@ import {
   Text,
   SimpleGrid,
   ThemeIcon,
-  Anchor,
-  Divider,
+  Avatar,
   Center,
   Box,
   Burger,
@@ -21,7 +20,7 @@ import {
 import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
 import {
-  IconNotification,
+  IconLogout,
   IconCode,
   IconBook,
   IconChartPie3,
@@ -127,7 +126,7 @@ const mockdata = [
   },
 ];
 
-export default function HeaderMegaMenu() {
+export default function HeaderMegaMenu(props) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -193,61 +192,24 @@ export default function HeaderMegaMenu() {
               </HoverCard.Dropdown>
             </HoverCard>
 
-            <Button variant="subtle">Log out</Button>
+            <Group spacing={7}>
+              <Avatar
+                src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"
+                alt="username"
+                radius="xl"
+                size={20}
+              />
+              <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+                {props.username}
+              </Text>
+            </Group>
+
+            <Button variant="subtle" onClick={props.logout}>
+              <IconLogout stroke={1.5} />
+            </Button>
           </Group>
-          <Burger
-            opened={drawerOpened}
-            onClick={toggleDrawer}
-            className={classes.hiddenDesktop}
-          />
         </Group>
       </Header>
-
-      <Drawer
-        opened={drawerOpened}
-        onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="Navigation"
-        className={classes.hiddenDesktop}
-        zIndex={1000000}
-      >
-        <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Features
-              </Box>
-              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
-
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-
-          <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
-          </Group>
-        </ScrollArea>
-      </Drawer>
     </Box>
   );
 }
