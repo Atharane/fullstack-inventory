@@ -1,13 +1,11 @@
 import React from "react";
-import Collapsible from "./Collapsible.tsx"
-import { createStyles, Navbar, Collapse } from "@mantine/core";
+import Collapsible from "./Collapsible.tsx";
+import {Burger,  ActionIcon, Button, createStyles, Navbar, Collapse } from "@mantine/core";
 import {
   IconHome2,
   IconChartInfographic,
-  IconSwitchHorizontal,
-  IconLogout,
+  IconMenu2
 } from "@tabler/icons";
-
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef("icon");
@@ -89,7 +87,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 
 const data = [
   { link: "", label: "Home", icon: IconHome2 },
-  { link: "", label: "Reports", icon: IconChartInfographic }
+  { link: "", label: "Reports", icon: IconChartInfographic },
 ];
 
 export default function NavbarSimple() {
@@ -113,12 +111,27 @@ export default function NavbarSimple() {
     </a>
   ));
 
+  const [opened, setOpened] = React.useState(true);
+
   return (
-      <Navbar height={700} width={{ sm: 240 }} p="md">
-        <Navbar.Section grow>
-          {links}
-          <Collapsible />
-        </Navbar.Section>
-      </Navbar>
+    <>
+      <Burger
+        p="sm"
+        pt="lg"
+        pb="lg"
+        size="sm"
+        opened={opened}
+        onClick={() => setOpened((o) => !o)}
+      />
+
+      <Collapse in={opened}>
+        <Navbar height={700} width={{ sm: 240 }} p={0}>
+          <Navbar.Section grow>
+            {links}
+            <Collapsible />
+          </Navbar.Section>
+        </Navbar>
+      </Collapse>
+    </>
   );
 }

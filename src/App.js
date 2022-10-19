@@ -48,11 +48,14 @@ class App extends Component {
         scopes: config.scopes,
         account: account,
       });
-      // this.setState({ user: user });
-      console.log(user);
 
       // get username
       this.username = user.account.username;
+
+      // set session timeout of 1 minutes
+      setTimeout(() => {
+        this.logout();
+      }, 6000000);
     } catch (error) {
       this.catch(error);
     }
@@ -60,7 +63,9 @@ class App extends Component {
 
   // logout
   logout = () => {
-    const currentAccount = this.msalInstance.getAccountByHomeId(this.msalInstance.getAllAccounts()[0]);
+    const currentAccount = this.msalInstance.getAccountByHomeId(
+      this.msalInstance.getAllAccounts()[0]
+    );
     this.msalInstance.logoutRedirect({
       account: currentAccount,
       postLogoutRedirectUri: "http://localhost:3000/",
@@ -81,10 +86,12 @@ class App extends Component {
               )
             }
           />
+
           <Route
             path="/dashboard"
             element={<Dashboard logout={this.logout} />}
           />
+
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
@@ -94,7 +101,5 @@ class App extends Component {
     console.log(error);
   }
 }
-
-// console.log(`${App}`)
 
 export default App;

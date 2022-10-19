@@ -35,11 +35,11 @@ let stat_props = {
 export default function Dashboard(props) {
   // const child = <Skeleton height={140} radius="md" animate={false} />;
   let logout = props.logout;
-  // let username = props.username;
+  let username = props.username;
 
   return (
     <>
-      <Navbar logout={logout} />
+      <Navbar logout={logout} username={username} />
 
       <Grid>
         <Grid.Col xs={3}>

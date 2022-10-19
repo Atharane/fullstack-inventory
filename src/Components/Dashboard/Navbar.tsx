@@ -1,10 +1,10 @@
 import React from "react";
+
 import {
   createStyles,
   Header,
   HoverCard,
   Group,
-  Button,
   UnstyledButton,
   Text,
   SimpleGrid,
@@ -12,13 +12,10 @@ import {
   Avatar,
   Center,
   Box,
-  Burger,
-  Drawer,
-  Collapse,
-  ScrollArea,
+  Menu,
+  TextInput,
 } from "@mantine/core";
-import { MantineLogo } from "@mantine/ds";
-import { useDisclosure } from "@mantine/hooks";
+
 import {
   IconLogout,
   IconCode,
@@ -27,6 +24,7 @@ import {
   IconFingerprint,
   IconCoin,
   IconChevronDown,
+  IconSearch
 } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
@@ -71,18 +69,9 @@ const useStyles = createStyles((theme) => ({
     "&:active": theme.activeStyles,
   },
 
-  dropdownFooter: {
-    backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[7]
-        : theme.colors.gray[0],
-    margin: -theme.spacing.md,
-    marginTop: theme.spacing.sm,
-    padding: `${theme.spacing.md}px ${theme.spacing.md * 2}px`,
-    paddingBottom: theme.spacing.xl,
-    borderTop: `1px solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
-    }`,
+  user: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    padding: `${theme.spacing.xs}px ${theme.spacing.xs}px`,
   },
 
   hiddenMobile: {
@@ -127,10 +116,7 @@ const mockdata = [
 ];
 
 export default function HeaderMegaMenu(props) {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false);
-  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const { classes, theme } = useStyles();
+  const { classes, theme, cx } = useStyles();
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -152,18 +138,29 @@ export default function HeaderMegaMenu(props) {
 
   return (
     <Box>
-      <Header height={60} px="md">
+      <Header height={46} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
+          
+          {/* brand logo */}
           <Group>
             <img
               src="digital_prudentia_cropped.png"
               alt="digital prudentia"
-              height={30}
+              height={24}
             />
-            {/* <Text  color="black"> Digital Prudentia </Text> */}
           </Group>
 
           <Group className={classes.hiddenMobile}>
+            
+            <TextInput
+              placeholder="Search"
+              size="xs"
+              icon={<IconSearch size={12} stroke={1.5} />}
+              rightSectionWidth={70}
+              styles={{ rightSection: { pointerEvents: "none" } }}
+            />
+
+            {/* Admin Hover Card */}
             <HoverCard
               width={600}
               position="bottom"
@@ -192,22 +189,68 @@ export default function HeaderMegaMenu(props) {
               </HoverCard.Dropdown>
             </HoverCard>
 
-            <Group spacing={7}>
-              <Avatar
-                src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"
-                alt="username"
-                radius="xl"
-                size={20}
-              />
-              <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                {props.username}
-              </Text>
-            </Group>
+            {/* User avatar dropdown */}
+            <Menu
+              width={260}
+              position="bottom-end"
+              transition="pop-top-right"
+            >
+              <Menu.Target>
+                <UnstyledButton
+                  className={cx(classes.user)}
+                >
+                  <Group spacing={7}>
+                    <Avatar
+                      src="https://avatars0.githubusercontent.com/u/9947422?s=460&u=3a38d5d262877fcb40b8b8fbaaafdcfbaa2f4b7f&v=4"
+                      alt="atharva"
+                      radius="xl"
+                      size={20}
+                    />
+                    <Text
+                      weight={500}
+                      size="sm"
+                      sx={{ lineHeight: 1, color: theme.black }}
+                      mr={3}
+                    >
+                      {props.username ? props.username : "username"}
+                    </Text>
+                    <IconChevronDown size={12} stroke={1.5} />
+                  </Group>
+                </UnstyledButton>
+              </Menu.Target>
 
-            <Button variant="subtle" onClick={props.logout}>
-              <IconLogout stroke={1.5} />
-            </Button>
+              <Menu.Dropdown>
+                <Menu.Label>Settings</Menu.Label>
+                <Menu.Item icon={<IconCoin size={14} stroke={1.5} />}>
+                  Account settings
+                </Menu.Item>
+                <Menu.Item icon={<IconCoin size={14} stroke={1.5} />}>
+                  Change account
+                </Menu.Item>
+                <Menu.Item
+                  onClick={props.logout}
+                  icon={<IconLogout size={14} stroke={1.5} />}
+                >
+                  Logout
+                </Menu.Item>
+
+                <Menu.Divider />
+
+                <Menu.Label>Danger zone</Menu.Label>
+                <Menu.Item icon={<IconCoin size={14} stroke={1.5} />}>
+                  Pause subscription
+                </Menu.Item>
+                <Menu.Item
+                  color="red"
+                  icon={<IconCoin size={14} stroke={1.5} />}
+                >
+                  Delete account
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+
           </Group>
+          
         </Group>
       </Header>
     </Box>

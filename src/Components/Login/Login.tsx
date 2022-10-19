@@ -11,6 +11,8 @@ import {
   Anchor,
 } from "@mantine/core";
 
+import { IconBrandWindows} from "@tabler/icons";
+
 const useStyles = createStyles((theme) => ({
   wrapper: {
     maxHeight: "100vh",
@@ -71,8 +73,35 @@ export default function AuthenticationImage(props) {
         <PasswordInput placeholder="password" mt="md" size="md" />
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
 
-        <Button fullWidth mt="xl" size="md" onClick={props.login}>
+        <Button fullWidth mt="xl" size="md">
           Login
+        </Button>
+
+        <Button
+          fullWidth
+          mt="xl"
+          size="md"
+          onClick={props.login}
+          leftIcon={<IconBrandWindows size={18} />}
+          styles={(theme) => ({
+            root: {
+              backgroundColor: "#181818",
+              border: 0,
+              height: 42,
+              paddingLeft: 20,
+              paddingRight: 20,
+
+              "&:hover": {
+                backgroundColor: theme.fn.darken("#080808", 0.05),
+              },
+            },
+
+            leftIcon: {
+              marginRight: 15,
+            },
+          })}
+        >
+          Login with Microsoft
         </Button>
 
         <Text align="center" mt="md">
