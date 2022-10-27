@@ -102,9 +102,8 @@ export default function AuthenticationImage() {
           mt="xl"
           size="md"
           component="a"
-          target="_blank"
           rel="noopener noreferrer"
-          href="https://twitter.com/mantinedev"
+          href="/dashboard"
           leftIcon={<IconBrandGoogle size={18} />}
           styles={(theme) => ({
             root: {
