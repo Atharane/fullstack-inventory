@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from 'react';
+
 import {
   Paper,
   createStyles,
@@ -11,20 +12,20 @@ import {
   Anchor,
 } from "@mantine/core";
 
-import { IconBrandWindows} from "@tabler/icons";
+import { IconBrandGoogle } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    maxHeight: "100vh",
+    minHeight: 900,
     backgroundSize: "cover",
-    backgroundImage: "url(servers.jpg)",
+    backgroundImage: "url(images/inventory.jpg)",
   },
 
   form: {
     borderRight: `1px solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
     }`,
-    height: "100vh",
+    minHeight: 900,
     maxWidth: 450,
     paddingTop: 80,
 
@@ -45,12 +46,28 @@ const useStyles = createStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
   },
+
+  loginButton: {
+    root: {
+      backgroundColor: "#24282c",
+      border: 0,
+      height: 42,
+      paddingLeft: 20,
+      paddingRight: 20,
+
+      "&:hover": {
+        backgroundColor: theme.fn.darken("#121416", 0.05),
+      },
+    },
+
+    leftIcon: {
+      marginRight: 15,
+    },
+  },
 }));
 
-
-export default function AuthenticationImage(props) {
+export default function AuthenticationImage() {
   const { classes } = useStyles();
-
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
@@ -61,18 +78,21 @@ export default function AuthenticationImage(props) {
           mt="md"
           mb={50}
         >
-          <img
-            src="digital_prudentia.png"
-            alt="digital prudentia"
-            className={classes.logo}
-          />
-          Welcome back!
+          Welcome back to Inventory Dashboard!
         </Title>
 
-        <TextInput placeholder="user@gmail.com" size="md" />
-        <PasswordInput placeholder="password" mt="md" size="md" />
+        <TextInput
+          label="Email address"
+          placeholder="hello@gmail.com"
+          size="md"
+        />
+        <PasswordInput
+          label="Password"
+          placeholder="Your password"
+          mt="md"
+          size="md"
+        />
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
-
         <Button fullWidth mt="xl" size="md">
           Login
         </Button>
@@ -81,18 +101,21 @@ export default function AuthenticationImage(props) {
           fullWidth
           mt="xl"
           size="md"
-          onClick={props.login}
-          leftIcon={<IconBrandWindows size={18} />}
+          component="a"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://twitter.com/mantinedev"
+          leftIcon={<IconBrandGoogle size={18} />}
           styles={(theme) => ({
             root: {
-              backgroundColor: "#181818",
+              backgroundColor: "#24282c",
               border: 0,
               height: 42,
               paddingLeft: 20,
               paddingRight: 20,
 
               "&:hover": {
-                backgroundColor: theme.fn.darken("#080808", 0.05),
+                backgroundColor: theme.fn.darken("#121416", 0.05),
               },
             },
 
@@ -101,12 +124,12 @@ export default function AuthenticationImage(props) {
             },
           })}
         >
-          Login with Microsoft
+          Login with Google
         </Button>
 
         <Text align="center" mt="md">
           Don&apos;t have an account?{" "}
-          <Anchor<"a">
+          <Anchor
             href="#"
             weight={700}
             onClick={(event) => event.preventDefault()}
