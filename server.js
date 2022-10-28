@@ -1,8 +1,19 @@
 const express = require("express");
-const joi = require("joi")
+const mysql = require("mysql");
+// const joi = require("joi")
 const app = express();
 
+
+
 app.use(express.json());
+
+// create a connection variable with the required details
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "inventory-management", // use the specified database
+});
 
 
 // Request of type localhost:300/api/inventory
@@ -20,10 +31,9 @@ app.get("/api/inventory", (req, res) => {
   */
 });
 
-// Request of type localhost:300/api/bills
-app.get("/api/bills", (req, res) => {
-  // get data from BILLS X BILL_DETAILS TABLE table
-
+// Request of type localhost:300/api/sales
+app.get("/api/sales", (req, res) => {
+  // get data from sales X sales_details TABLE table
   // EXAMPLE;
   /*
   [
@@ -47,7 +57,10 @@ app.get("/api/sales_today", (req, res) => {
 });
 
 
-app.post("/api/additem/", (req, res) => {
+app.get("/api/additem/:itemname", (req, res) => {
+
+  let itemname = req.params.itemname;
+
   // 4oo bad request
 
   // validation of request body
@@ -64,10 +77,29 @@ app.post("/api/additem/", (req, res) => {
   // if item already exists, update the quantity
   // else add new item to inventory
 
-  const updated_item = null
+  // INSERT INTO `inventory` (`item_id`, `item_name`, `quantity`, `price`) VALUES ('1', 'sony xb700', '12', '6800');
+
+  
+con.connect(function (err) {
+  if (err) throw err; // if connection is successful
+
+  con.query(
+    `INSERT INTO inventory (item_name, quantity, price) VALUES ('${itemname}', '16', '16900');`,
+    function (err, result, fields) {
+      // if any error while executing above query, throw error
+      if (err) throw err; // if there is no error, you have the result
+      console.log(result);
+      console.log("Number of rows affected : " + result.affectedRows);
+      console.log(
+        "Number of records affected with warning : " + result.warningCount
+      );
+      console.log("Message from MySQL Server : " + result.message);
+    }
+  );
+});
 
   // return updated value
-  res.send(updated_item);
+  res.send("Item added successfully");
 });
 
 const port = process.env.PORT || 3010;

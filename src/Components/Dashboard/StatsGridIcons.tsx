@@ -10,7 +10,8 @@ import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   root: {
-    padding: theme.spacing.xl * 1.5,
+    paddingTop: 10,
+    paddingBottom: 10
   },
 
   label: {
@@ -72,7 +73,7 @@ export default function StatsGridIcons({ data }: StatsGridIconsProps) {
 
   return (
     <div className={classes.root}>
-      <SimpleGrid cols={3} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
+      <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         {stats}
       </SimpleGrid>
     </div>

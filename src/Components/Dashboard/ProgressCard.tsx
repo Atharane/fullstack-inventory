@@ -12,7 +12,7 @@ export default function ProgressCard() {
       })}
     >
       <Text size="xs" transform="uppercase" weight={700} color="dimmed">
-        Monthly goal
+        Daily sales target
       </Text>
       <Text size="lg" weight={500}>
         $5.431 / $10.000
