@@ -5,8 +5,8 @@ const app = express();
 
 // Database schema
 // inventory (`item_id`, `item_name`, `remaining`, `cost_price`, `selling_price`) PK: item_id
-// sales (`sale_id`, `customer_name`, `sale_date`) PK: sale_id
-// sales_items (`sale_id`, `item_id`, `quantity`) PK: (sale_id, item_id) FK: sale_id, item_id
+// sales (`sale_id`, `item_id`, `quantity`) PK: sale_id
+// sales_details (`sale_id`, `customer_name`, `sale_date`, `total_price`) PK: (sale_id, item_id) FK: sale_id, item_id
 // restock (`restock_id`, `item_id`, `quantity`, `restock_date`) PK: restock_id FK: item_id
 
 
@@ -34,6 +34,28 @@ app.get("/api/inventory", (req, res) => {
   ....... 
   ]
   */
+  const data = [
+    {
+      item_id: "1",
+      item_name: "Apple iPhone 14 Pro Max",
+      price: "$1,299.00",
+      quantity: "8",
+    },
+    {
+      item_id: "2",
+      item_name: "Apple iPhone 11",
+      price: "$699.00",
+      quantity: "5",
+    },
+    {
+      item_id: "3",
+      item_name: "Apple iPhone 11 Pro",
+      price: "$999.00",
+      quantity: "3",
+    },
+  ];
+
+  res.send(data);
 });
 
 // Request of type localhost:300/api/sales
