@@ -5,10 +5,9 @@ const app = express();
 
 // Database schema
 // inventory (`item_id`, `item_name`, `remaining`, `cost_price`, `selling_price`) PK: item_id
-// sales (`sale_id`, `item_id`, `quantity`) PK: sale_id
-// sales_details (`sale_id`, `customer_name`, `sale_date`, `total_price`) PK: (sale_id, item_id) FK: sale_id, item_id
+// sales (`sale_id`, `item_id`, `quantity`) PK: (sale_id, item_id) 
+// sales_details (`sale_id`, `customer_name`, `sale_date`, `total_price`) PK: sale_id FK: sale_id
 // restock (`restock_id`, `item_id`, `quantity`, `restock_date`) PK: restock_id FK: item_id
-
 
 app.use(express.json());
 

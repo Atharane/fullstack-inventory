@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { SignInButton } from "./SignInButton.tsx";
 import {
   Paper,
   createStyles,
@@ -11,8 +11,8 @@ import {
   Text,
   Anchor,
 } from "@mantine/core";
+import { useIsAuthenticated } from "@azure/msal-react";
 
-import { IconBrandGoogle } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -68,6 +68,8 @@ const useStyles = createStyles((theme) => ({
 
 export default function AuthenticationImage() {
   const { classes } = useStyles();
+  const isAuthenticated = useIsAuthenticated();
+  
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
@@ -97,7 +99,7 @@ export default function AuthenticationImage() {
           Login
         </Button>
 
-        <Button
+        {/* <Button
           fullWidth
           mt="xl"
           size="md"
@@ -124,7 +126,8 @@ export default function AuthenticationImage() {
           })}
         >
           Login with Google
-        </Button>
+        </Button> */}
+        <SignInButton />
 
         <Text align="center" mt="md">
           Don&apos;t have an account?{" "}

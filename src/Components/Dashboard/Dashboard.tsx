@@ -69,14 +69,7 @@ const division_data = {
 export default function Subgrid() {
   const theme = useMantineTheme();
 
-  let [tableData, setTableData] = React.useState([
-    {
-      item_id: "1",
-      item_name: "Apple iPhone 14 Pro Max",
-      price: "$1,299.00",
-      quantity: "8",
-    },
-  ]);
+  let [tableData, setTableData] = React.useState(undefined);
 
   React.useEffect(() => {
     fetch("localhost:3010/api/inventory")
@@ -92,7 +85,7 @@ export default function Subgrid() {
         <Navbar />
       </Grid.Col>
 
-      <Grid.Col span={9}>
+      <Grid.Col span={9} p="sm">
         <ProgressCard />
         <StatsGridIcons data={data} />
         <StatsDivision
@@ -103,13 +96,9 @@ export default function Subgrid() {
         <StatsGroup data={banner_data} />
       </Grid.Col>
 
-      {/* <Grid.Col span={6}>
-        {getChild(getSubHeight(3, theme.spacing.md))}
-      </Grid.Col> */}
-
       <Grid.Col span={15}>
         {/* {getChild(getSubHeight(3, theme.spacing.md))} */}
-        <TableSort data={tableData} />
+        {tableData ? <TableSort data={tableData} />: "No data available"}
       </Grid.Col>
     </Grid>
   );

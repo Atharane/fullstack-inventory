@@ -16,6 +16,7 @@ const useStyles = createStyles((theme) => ({
       theme.colors[theme.primaryColor][4]
     } 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
     borderBottom: 0,
+    padding: "0 24px"
   },
 
   inner: {
@@ -68,56 +69,12 @@ interface HeaderSearchProps {
 export default function HeaderMenuColored() {
   const links = [
     {
-      link: "/about",
-      label: "Features",
+      link: "/actions",
+      label: "Actions",
     },
     {
-      link: "#1",
-      label: "Learn",
-      links: [
-        {
-          link: "/docs",
-          label: "Documentation",
-        },
-        {
-          link: "/resources",
-          label: "Resources",
-        },
-        {
-          link: "/community",
-          label: "Community",
-        },
-        {
-          link: "/blog",
-          label: "Blog",
-        },
-      ],
-    },
-    {
-      link: "/about",
-      label: "About",
-    },
-    {
-      link: "/pricing",
-      label: "Pricing",
-    },
-    {
-      link: "#2",
-      label: "Support",
-      links: [
-        {
-          link: "/faq",
-          label: "FAQ",
-        },
-        {
-          link: "/demo",
-          label: "Book a demo",
-        },
-        {
-          link: "/forums",
-          label: "Forums",
-        },
-      ],
+      link: "/logout",
+      label: "Logout",
     },
   ];
 
@@ -163,8 +120,7 @@ export default function HeaderMenuColored() {
 
   return (
     <Header height={56} className={classes.header} mb={20}>
-      <Container>
-        {" "}
+
         <div className={classes.inner}>
           <h4 style={{ color: "white" }}>📦 Inventory Management system</h4>
           <Group spacing={5} className={classes.links}>
@@ -178,7 +134,6 @@ export default function HeaderMenuColored() {
             color="#fff"
           />
         </div>
-      </Container>
     </Header>
   );
 }
